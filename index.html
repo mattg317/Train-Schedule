@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Train Schedule</title>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+<body>
+
+<div class="container">
+	<!-- jumbotron -->
+		<div class="jumbotron">
+		  <h1>Train Schedule</h1>
+		  <p>I choo choo choose you</p> 
+		</div>
+
+<!-- trian table -->
+		<div class="panel panel-default">
+			  <!-- Default panel contents -->
+			  <div class="panel-heading">Current Train Schedule</div>
+
+			  <!-- Table -->
+			  <table class="table">
+				<thead>
+					<tr>
+						<th>Train Name</th>
+						<th>Destination</th>
+						<th>Frequence(min)</th>
+						<th>Next Arrival</th>
+						<th>Minutes Away</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td> Sample Train</td>
+						<td> Sample Dest</td>
+						<td> Sample Frequency</td>
+						<td>Sampel Arrival </td>
+						<td> sample minutes</td>
+					</tr>
+				</tbody>
+			  </table>
+		</div>
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Add Train</h3>
+		  </div>
+		  <div class="panel-body">
+		    <form>
+						<div class="form-group">
+							<label for="bidderName">Train Name</label>
+							<input type="text" class="form-control" id="trainName">
+						</div>
+						<div class="form-group">
+							<label for="bidderPrice">Destination</label>
+							<input type="number" class="form-control" id="destination">
+						</div>
+						<div class="form-group">
+							<label for="bidderPrice">First Train Time(HH:mm-military time)</label>
+							<input type="number" class="form-control" id="trainTime">
+						</div>
+						<div class="form-group">
+							<label for="bidderPrice">Frequency (min)</label>
+							<input type="number" class="form-control" id="Frequency">
+						</div>			
+						<button id="submitBid" type="submit" class="btn btn-primary">Submit</button>
+					</form>
+
+		</div>
+
+
+
+</div>	
+</body>
+</html>
