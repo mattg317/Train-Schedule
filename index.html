@@ -17,6 +17,9 @@
 
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+
 </head>
 <body>
 
@@ -33,7 +36,7 @@
 			  <div class="panel-heading">Current Train Schedule</div>
 
 			  <!-- Table -->
-			  <table class="table">
+			  <table class="table" id="trainTable">
 				<thead>
 					<tr>
 						<th>Train Name</th>
@@ -44,7 +47,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
+					<tr class="trains">
 						<td> Sample Train</td>
 						<td> Sample Dest</td>
 						<td> Sample Frequency</td>
@@ -67,23 +70,24 @@
 						</div>
 						<div class="form-group">
 							<label for="bidderPrice">Destination</label>
-							<input type="number" class="form-control" id="destination">
+							<input type="text" class="form-control" id="trainDest">
 						</div>
 						<div class="form-group">
 							<label for="bidderPrice">First Train Time(HH:mm-military time)</label>
-							<input type="number" class="form-control" id="trainTime">
+							<input type="number" class="form-control" id="trainFirst">
 						</div>
 						<div class="form-group">
 							<label for="bidderPrice">Frequency (min)</label>
-							<input type="number" class="form-control" id="Frequency">
-						</div>			
-						<button id="submitBid" type="submit" class="btn btn-primary">Submit</button>
+							<input type="number" class="form-control" id="trainFreq">
+						</div>				
+						<button id="submitTrain" type="submit" class="btn btn-primary">Submit</button>
 					</form>
 
 		</div>
 
 
 
-</div>	
+</div>
+<script type="text/javascript" src='assets/javascript/train.js'></script>
 </body>
 </html>
