@@ -12,33 +12,34 @@ console.log("live");
     messagingSenderId: "394939120183"
   };
   firebase.initializeApp(config);
- //Variable========
+//Variable========
   var database = firebase.database();
-
- //  	var time = Firebase.ServerValue.TIMESTAMP;
-	// console.log(time);
 
 //intiialize variables===============
 var trainInitial = 0;
 var trainNumber = trainInitial;
 
 //initialize database========================
-database.ref().on('value',function(snapshot){
+database.ref().on('child_added',function(childSnapshot){
+	console.log(childSnapshot.val().trainsName);
+	console.log(childSnapshot.val().destination);
+	console.log(childSnapshot.val().firstTrain);
+	console.log(childSnapshot.val().frequency);
 
-	trainNumber= trainNumber;
-	console.log(trainNumber)
-	// trainName = snapshot.val().trainsName;
-	console.log("length "+snapshot.numChildren())
+	$('#trainTable').append(
+		"<tr>" +
+            "<td> " + childSnapshot.val().trainsName + " </td>" +
+            "<td> " + childSnapshot.val().destination + " </td>" +
+            "<td> " + childSnapshot.val().firstTrain + " </td>" +
+            "<td></td>"+
+            "<td> " + childSnapshot.val().frequency + " </td>" +
+            "<td></td>"+
+            
+        "<tr>"
+		)
 
 	
-	for(var i=1, n=snapshot.numChildren(); i<=n;i++){
-		trainName = snapshot.child('train'+i).val().trainsName;
-		trainDest= snapshot.child('train'+i).val().destination;
-		trainFirst =snapshot.child('train'+i).val().firstTrain;
-		trainFreq = snapshot.child('train'+i).val().frequency;
 
-		$('#trainTable').append("<tr><td>"+trainName+"</td>"+"<td>"+trainDest+"</td>"+"<td>"+trainFirst+"</td>"+"<td>"+trainFreq+"</td></tr>");
-	}
 });
 
 //register on click events
@@ -57,7 +58,7 @@ $("#submitTrain").on('click', function(){
 	console.log(trainFirst);
 	console.log(trainFreq);
 
-	database.ref("train"+trainNumber).set({
+	database.ref().push({
 		trainsName: trainName,
 		destination: trainDest,
 		firstTrain: trainFirst,
