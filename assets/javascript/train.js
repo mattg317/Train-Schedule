@@ -25,20 +25,40 @@ database.ref().on('child_added',function(childSnapshot){
 	console.log(childSnapshot.val().destination);
 	console.log(childSnapshot.val().firstTrain);
 	console.log(childSnapshot.val().frequency);
+	console.log(childSnapshot.val().timeAdded);
 
-	$('#trainTable').append(
+
+//Time conversion===============
+	var time = moment(new Date(childSnapshot.val().timeAdded));
+	var freq = childSnapshot.val().frequency 
+	var start = parseInt(childSnapshot.val().firstTrain);
+	time = parseInt(time.format("HHmm"));
+	var timeDiff = time - start;
+	var minAway = freq - (timeDiff % freq);
+	var nextTrain = (time + minAway).toString();
+
+	nextTrain= moment(nextTrain, 'HHmm').format('hh:mm A')
+
+	console.log(time);
+	console.log(start);
+	console.log(timeDiff)
+	console.log("till next "+minAway)
+
+	console.log("next train " + nextTrain)
+
+//Append train==================
+$('#trainTable').append(
 		"<tr>" +
             "<td> " + childSnapshot.val().trainsName + " </td>" +
             "<td> " + childSnapshot.val().destination + " </td>" +
-            "<td> " + childSnapshot.val().firstTrain + " </td>" +
-            "<td></td>"+
             "<td> " + childSnapshot.val().frequency + " </td>" +
+            "<td>"+ nextTrain+ "</td>"+
+            "<td>"+minAway+"</td>" +
             "<td></td>"+
             
-        "<tr>"
+        "</tr>"
 		)
 
-	
 
 });
 
@@ -62,7 +82,8 @@ $("#submitTrain").on('click', function(){
 		trainsName: trainName,
 		destination: trainDest,
 		firstTrain: trainFirst,
-		frequency: trainFreq
+		frequency: trainFreq,
+		timeAdded: firebase.database.ServerValue.TIMESTAMP,
 	});
 
 	$('#trainName').val('');
