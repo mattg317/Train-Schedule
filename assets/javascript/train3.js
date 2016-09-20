@@ -27,19 +27,26 @@ database.ref().on('child_added',function(childSnapshot){
 	console.log(childSnapshot.val().frequency);
 	console.log(childSnapshot.val().timeAdded);
 
-trainNumber=childSnapshot.val().trainsNumber;
-console.log('loaded train '+ trainNumber);
 
 //Time conversion===============
 	var time = moment(new Date(childSnapshot.val().timeAdded));
 	var freq = childSnapshot.val().frequency 
 	var start = parseInt(childSnapshot.val().firstTrain);
-	time = parseInt(time.format("HHmm"));
-	var timeDiff = time - start;
-	var minAway = freq - (timeDiff % freq);
-	var nextTrain = (time + minAway).toString();
+//===============
 
-	nextTrain= moment(nextTrain, 'HHmm').format('hh:mm A')
+start =moment(start, 'HHmm')
+var timeDiff = time.diff(start, 'minutes')
+//============
+
+	// time = time.format("hh mm A");
+	// var timeDiff = time.diff(start, 'minutes')
+	timeDiff=parseInt(timeDiff);
+	var minAway = freq - (timeDiff % freq);
+	var nextTrain =moment(time).add(minAway, 'minutes') 
+	nextTrain = nextTrain.format("hh mm A")
+	// nextTrain= moment(nextTrain, "HHmm")
+
+	// nextTrain= moment(nextTrain, 'HHmm').format('hh:mm A')
 
 	console.log(time);
 	console.log(start);
@@ -50,7 +57,7 @@ console.log('loaded train '+ trainNumber);
 
 //Append train==================
 $('#trainTable').append(
-		"<tr id='"+childSnapshot.val().trainsName +"'>" +
+		"<tr>" +
             "<td> " + childSnapshot.val().trainsName + " </td>" +
             "<td> " + childSnapshot.val().destination + " </td>" +
             "<td> " + childSnapshot.val().frequency + " </td>" +
@@ -60,6 +67,7 @@ $('#trainTable').append(
             
         "</tr>"
 		)
+
 
 });
 
@@ -79,13 +87,12 @@ $("#submitTrain").on('click', function(){
 	console.log(trainFirst);
 	console.log(trainFreq);
 
-	database.ref("train"+trainNumber).set({
+	database.ref().push({
 		trainsName: trainName,
 		destination: trainDest,
 		firstTrain: trainFirst,
 		frequency: trainFreq,
 		timeAdded: firebase.database.ServerValue.TIMESTAMP,
-		trainsNumber: trainNumber
 	});
 
 	$('#trainName').val('');
@@ -93,34 +100,12 @@ $("#submitTrain").on('click', function(){
 	$('#trainFirst').val('');
 	$('#trainFreq').val('');
 
-console.log(trainNumber)
 	return false;
 });
 
-// console.log("--------------");
-console.log(database.ref().child('train3').trainsName);
-console.log("-----------");
-
-// var myRef = new Firebase("https://train-schedule-54443.firebaseio.com")
-
-$('#deleteTrain').on('click', function(){
-	console.log('click')
-var trainName = $('#trainName').val().trim();
-
-database.ref('train2').remove()
-		
 
 
 
-
-	return false;
-});
-// database.once("value",function(snapshot){
-// 	snapshot.forEach(function(childSnapshot){
-// 		console.log(childSnapshot.key());
-// 		console.log(childSnapshot.val());
-// 	})
-// })
 
 
 

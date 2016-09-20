@@ -37,7 +37,7 @@ database.ref().on('child_added',function(childSnapshot){
 	var minAway = freq - (timeDiff % freq);
 	var nextTrain = (time + minAway).toString();
 
-	nextTrain= moment(nextTrain, 'HHmm').format('hh:mm A')
+	// nextTrain= moment(nextTrain, 'HHmm').format('hh:mm A')
 
 	console.log(time);
 	console.log(start);
