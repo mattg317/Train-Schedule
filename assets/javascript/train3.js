@@ -20,7 +20,9 @@ var trainInitial = 0;
 var trainNumber = trainInitial;
 
 //Git hub auth==================
-database.authWithOAuthPopup('github', function(error, authData){
+// var ref = new Firebase("https://train-schedule-54443.firebaseio.com");
+var auth = firebase.auth()
+auth.authWithOAuthPopup('github', function(error, authData){
 	if(error){
 		console.log("login Failed!", erro);
 	} else{
