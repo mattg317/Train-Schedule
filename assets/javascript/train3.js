@@ -19,6 +19,15 @@ console.log("live");
 var trainInitial = 0;
 var trainNumber = trainInitial;
 
+//Git hub auth==================
+database.authWithOAuthPopup('github', function(error, authData){
+	if(error){
+		console.log("login Failed!", erro);
+	} else{
+		console.log("Authenticated successfully with payload:", authData);
+	}
+})
+
 //initialize database========================
 database.ref().on('child_added',function(childSnapshot){
 	console.log(childSnapshot.val().trainsName);
