@@ -28,14 +28,14 @@ database.ref().on('child_added',function(childSnapshot){
 	console.log(childSnapshot.val().timeAdded);
 
 
-//Time conversion===============
+//Time conversion=============== take 
 	var time = moment(new Date(childSnapshot.val().timeAdded));
 	var freq = childSnapshot.val().frequency 
 	var start = parseInt(childSnapshot.val().firstTrain);
 //===============
 
-start =moment(start, 'HHmm')
-var timeDiff = time.diff(start, 'minutes')
+	start =moment(start, 'HHmm')
+	var timeDiff = time.diff(start, 'minutes')
 //============
 
 	// time = time.format("hh mm A");
@@ -43,7 +43,7 @@ var timeDiff = time.diff(start, 'minutes')
 	timeDiff=parseInt(timeDiff);
 	var minAway = freq - (timeDiff % freq);
 	var nextTrain =moment(time).add(minAway, 'minutes') 
-	nextTrain = nextTrain.format("hh mm A")
+	nextTrain = nextTrain.format("hh:mm A")
 	// nextTrain= moment(nextTrain, "HHmm")
 
 	// nextTrain= moment(nextTrain, 'HHmm').format('hh:mm A')

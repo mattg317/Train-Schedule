@@ -101,26 +101,38 @@ console.log(trainNumber)
 console.log(database.ref().child('train3').trainsName);
 console.log("-----------");
 
-// var myRef = new Firebase("https://train-schedule-54443.firebaseio.com")
-
+// =================================
+database.ref().on('child_removed', function(snapshot){
+	console.log("child has been removed");
+	$('#trainTable').append(
+		"<tr>" +
+            "<td> " + snapshot.val().trainsName + " </td>" +
+            "<td> " + snapshot.val().destination + " </td>" +
+            "<td> " + snapshot.val().frequency + " </td>" +
+            "<td></td>"+
+            "<td></td>" +
+            "<td></td>"+
+            
+        "</tr>"
+		)
+});
+//================================
 $('#deleteTrain').on('click', function(){
 	console.log('click')
 var trainName = $('#trainName').val().trim();
 
-database.ref('train2').remove()
-		
+// database.ref('train2').remove()
 
+console.log("line 126",database.ref('train4').trainsName);
+
+		
+snapshot[""]
 
 
 
 	return false;
 });
-// database.once("value",function(snapshot){
-// 	snapshot.forEach(function(childSnapshot){
-// 		console.log(childSnapshot.key());
-// 		console.log(childSnapshot.val());
-// 	})
-// })
+
 
 
 
