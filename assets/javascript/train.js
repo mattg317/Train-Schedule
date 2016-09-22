@@ -28,14 +28,23 @@ database.ref().on('child_added',function(childSnapshot){
 	console.log(childSnapshot.val().timeAdded);
 
 
-//Time conversion===============
+//Time conversion=============== take 
 	var time = moment(new Date(childSnapshot.val().timeAdded));
 	var freq = childSnapshot.val().frequency 
 	var start = parseInt(childSnapshot.val().firstTrain);
-	time = parseInt(time.format("HHmm"));
-	var timeDiff = time - start;
+//===============
+
+	start =moment(start, 'HHmm')
+	var timeDiff = time.diff(start, 'minutes')
+//============
+
+	// time = time.format("hh mm A");
+	// var timeDiff = time.diff(start, 'minutes')
+	timeDiff=parseInt(timeDiff);
 	var minAway = freq - (timeDiff % freq);
-	var nextTrain = (time + minAway).toString();
+	var nextTrain =moment(time).add(minAway, 'minutes') 
+	nextTrain = nextTrain.format("hh:mm A")
+	// nextTrain= moment(nextTrain, "HHmm")
 
 	// nextTrain= moment(nextTrain, 'HHmm').format('hh:mm A')
 
@@ -45,7 +54,6 @@ database.ref().on('child_added',function(childSnapshot){
 	console.log("till next "+minAway)
 
 	console.log("next train " + nextTrain)
-
 //Append train==================
 $('#trainTable').append(
 		"<tr>" +

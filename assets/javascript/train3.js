@@ -22,11 +22,11 @@ var trainNumber = trainInitial;
 //Git hub auth==================
 // var ref = new Firebase("https://train-schedule-54443.firebaseio.com");
 var auth = firebase.auth()
-auth.authWithOAuthPopup('github', function(error, authData){
+auth.authWithOAuthRedirect('github', function(error, authData){
 	if(error){
 		console.log("login Failed!", erro);
 	} else{
-		console.log("Authenticated successfully with payload:", authData);
+	
 	}
 })
 
